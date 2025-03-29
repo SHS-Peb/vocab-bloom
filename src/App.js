@@ -13,7 +13,7 @@ const SAMPLE_FLASHCARDS = [
   {
     id: 1,
     question: 'What is Hello in Spanish?',
-    answer: 'Hola',
+    answer: "Hola",
     options: [
       "Si",
       "Buenos",
