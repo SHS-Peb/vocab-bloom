@@ -34,7 +34,9 @@ function decodeString(str) {
 }
 
   return (
+    <div className="container" >
     <Flashcardlist flashcards={flashcards}/>
+    </div>
   );
 }
 
