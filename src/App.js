@@ -11,11 +11,13 @@ useEffect(() => {
     .get('https://opentdb.com/api.php?amount=10')
     .then(res => {
       setFlashcards(res.data.results.map((questionItem, index) => {
-        const answer = questionItem.correct_answer
-        const options = [...questionItem.incorrect_answers, answer]
+        const answer = decodeString(questionItem.correct_answer)
+        const options = [
+          ...questionItem.incorrect_answers.map(a => decodeString(a)), 
+          answer]
         return {
           id: `${index}-${Date.now()}`,
-          question: questionItem.question,
+          question: decodeString(questionItem.question),
           answer: questionItem.correct_answer,
           options: options.sort(() => Math.random() - .5)
         }
@@ -24,6 +26,12 @@ useEffect(() => {
     })
     .catch(error => console.error("Error fetching data:", error));
 }, []);
+
+function decodeString(str) {
+  const textArea = document.createElement('textarea')
+  textArea.innerHTML= str
+  return textArea.value
+}
 
   return (
     <Flashcardlist flashcards={flashcards}/>
